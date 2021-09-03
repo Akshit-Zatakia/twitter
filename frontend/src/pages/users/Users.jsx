@@ -1,8 +1,8 @@
-import { Col, Row, List, Spin } from "antd";
+import { Col, Row, List, Spin, Button, Space } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { getUsers } from "../../redux/actions/users";
+import { follow, getUsers, unfollow } from "../../redux/actions/users";
 
 export default function Users() {
   const { isAuthenticated, loading, user } = useSelector((state) => state.auth);
@@ -12,6 +12,8 @@ export default function Users() {
   useEffect(() => {
     dispatch(getUsers());
   }, []);
+
+  console.log(all);
 
   if (!isAuthenticated) {
     return <Redirect to="/" />;
@@ -34,6 +36,20 @@ export default function Users() {
                   title={item.username}
                   description={item.email}
                 />
+                <Space>
+                  <Button
+                    type="primary"
+                    onClick={(e) => dispatch(follow(item._id))}
+                  >
+                    Follow
+                  </Button>
+                  <Button
+                    type="primary"
+                    onClick={(e) => dispatch(unfollow(item._id))}
+                  >
+                    Unfollow
+                  </Button>
+                </Space>
               </List.Item>
             )}
           />

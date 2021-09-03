@@ -43,11 +43,13 @@ router.get("/me", async (req, res) => {
 // @desc   Get users
 router.get("/", async (req, res) => {
   try {
+    const followings = await User.findById(req.user.id);
     const users = await User.find({
       _id: {
         $ne: req.user.id,
       },
     }).select("-password");
+
     if (users.length == 0) {
       return res.status(400).json({
         message: "No user found!",
@@ -119,6 +121,7 @@ router.put("/unfollow", async (req, res) => {
       });
     }
 
+    console.log(id);
     const user = await User.findOne({
       _id: req.user.id,
       followers: id,

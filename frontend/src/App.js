@@ -17,6 +17,7 @@ import TimelinePost from "./pages/timeline/TimelinePost";
 import MyPosts from "./pages/myPosts/MyPosts";
 
 import Users from "./pages/users/Users";
+import Profile from "./pages/profile/Profile";
 
 if (localStorage.getItem("token")) {
   setAuthToken(localStorage.getItem("token"));
@@ -42,6 +43,7 @@ function App() {
               <PrivateRoute exact path="/timeline" Component={TimelinePost} />
               <PrivateRoute exact path="/my" Component={MyPosts} />
               <PrivateRoute exact path="/friends" Component={Users} />
+              <PrivateRoute exact path="/profile" Component={Profile} />
             </Switch>
           </section>
         </Fragment>

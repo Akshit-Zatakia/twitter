@@ -11,6 +11,11 @@ export default function Navbar() {
   const authLinks = (
     <ul>
       <li>
+        <Link to="/profile">
+          <span className="hide-sm">Profile</span>
+        </Link>
+      </li>
+      <li>
         <Link to="/timeline">
           <span className="hide-sm">Timeline posts</span>
         </Link>
