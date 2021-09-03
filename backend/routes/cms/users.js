@@ -24,6 +24,21 @@ router.get("/:userId", async (req, res) => {
   }
 });
 
+// @route  GET api/cms/users/auth
+// @desc   Get logged in user info
+router.get("/me", async (req, res) => {
+  try {
+    const users = await User.find({
+      id: req.user.id,
+    }).select("-password");
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+      error: true,
+    });
+  }
+});
+
 // @route  GET api/cms/users
 // @desc   Get users
 router.get("/", async (req, res) => {

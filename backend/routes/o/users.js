@@ -92,6 +92,8 @@ router.post(
         });
       }
 
+      console.log(user.id);
+
       const payload = {
         user: {
           id: user.id,

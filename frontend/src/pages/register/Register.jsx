@@ -1,18 +1,27 @@
 import React, { useState } from "react";
 import { Col, Input, Row, Form, Card, Button } from "antd";
+import { register } from "../../redux/actions/auth";
+import { useDispatch } from "react-redux";
 
 export default function Register() {
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
 
+  const onSubmit = async () => {
+    // e.preventDefault();
+    dispatch(register(formData));
+  };
+
   return (
-    <Row justify="center" align="middle" style={{ "min-height": "100vh" }}>
+    <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
       <Col>
         <Card>
-          <Form layout="vertical">
+          <Form layout="vertical" onFinish={onSubmit}>
             <Form.Item
               label="Username"
               name="username"
