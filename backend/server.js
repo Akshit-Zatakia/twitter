@@ -1,7 +1,13 @@
 const connectToDatabase = require("./config/database");
-
-const app = require("express")();
+const express = require("express");
+const app = express();
 require("dotenv").config();
+
+// authentication
+const auth = require("./middleware/auth");
+
+// middleware
+app.use(express.json({ extended: false }));
 
 // database
 connectToDatabase();
@@ -9,6 +15,7 @@ connectToDatabase();
 // -------------------- Routes ---------------------------- //
 
 // Private
+app.use("/api/cms/users", auth, require("./routes/cms/users"));
 
 // Public
 app.use("/api/o/users", require("./routes/o/users"));
