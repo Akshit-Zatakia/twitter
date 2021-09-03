@@ -1,18 +1,16 @@
-import { Col, List, Row, Spin } from "antd";
-import React, { useEffect, useState } from "react";
+import { Col, Row, List, Spin } from "antd";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import SendMessage from "../../components/message/SendMessage";
-import { loadUser } from "../../redux/actions/auth";
-import { getPost } from "../../redux/actions/post";
+import { getMyPost } from "../../redux/actions/post";
 
-export default function Home() {
+export default function MyPosts() {
   const { isAuthenticated, loading, user } = useSelector((state) => state.auth);
-  const { posts } = useSelector((state) => state.post);
+  const { my } = useSelector((state) => state.post);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getPost());
+    dispatch(getMyPost());
   }, []);
 
   if (!isAuthenticated) {
@@ -27,10 +25,9 @@ export default function Home() {
     <div style={{ padding: "20px" }}>
       <Row justify="center" align="middle">
         <Col span={12}>
-          <SendMessage username={user.username} />
           <List
             bordered
-            dataSource={posts}
+            dataSource={my}
             renderItem={(item) => (
               <List.Item>
                 <List.Item.Meta

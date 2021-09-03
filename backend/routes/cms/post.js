@@ -89,9 +89,12 @@ router.put(
 // @desc   Get posts
 router.get("/", async (req, res) => {
   try {
-    const posts = await Post.find({}).sort({
-      updatedAt: "desc",
-    });
+    const posts = await Post.find({})
+      .sort({
+        updatedAt: "desc",
+      })
+      .populate("userId", ["username"]);
+    console.log(posts);
     if (posts.length == 0) {
       return res.status(500).json({
         message: "No data!",
@@ -122,9 +125,11 @@ router.get("/timeline", async (req, res) => {
           },
         },
       ],
-    }).sort({
-      updatedAt: "desc",
-    });
+    })
+      .sort({
+        updatedAt: "desc",
+      })
+      .populate("userId", ["username"]);
     if (posts.length == 0) {
       return res.status(500).json({
         message: "No data!",

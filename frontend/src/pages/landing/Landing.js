@@ -2,10 +2,15 @@ import React from "react";
 import "./landing.css";
 import { Row, Col, Card, Button, Space } from "antd";
 import Title from "antd/lib/typography/Title";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Landing() {
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const history = useHistory();
+  if (isAuthenticated) {
+    return <Redirect to="/home" />;
+  }
   return (
     <div className="landing">
       <Row justify="space-around" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>

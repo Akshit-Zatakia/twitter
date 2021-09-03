@@ -5,31 +5,43 @@ import Login from "./pages/login/Login";
 import "antd/dist/antd.css";
 import Register from "./pages/register/Register";
 import store from "./store";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 
 import { loadUser } from "./redux/actions/auth";
 import Home from "./pages/home/Home";
 import setAuthToken from "./utils/setAuthToken";
 
-if (localStorage.token) {
-  setAuthToken(localStorage.token);
+import PrivateRoute from "./utils/PrivateRoute";
+import Navbar from "./components/navbar/Navbar";
+import TimelinePost from "./pages/timeline/TimelinePost";
+import MyPosts from "./pages/myPosts/MyPosts";
+
+import Users from "./pages/users/Users";
+
+if (localStorage.getItem("token")) {
+  setAuthToken(localStorage.getItem("token"));
 }
 
 function App() {
   useEffect(() => {
     store.dispatch(loadUser());
+    console.log("done");
   }, []);
 
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Fragment>
+          <Navbar />
           <section className="container">
             <Switch>
               <Route exact path="/" component={Landing} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
-              <Route exact path="/home" component={Home} />
+              <PrivateRoute exact path="/home" Component={Home} />
+              <PrivateRoute exact path="/timeline" Component={TimelinePost} />
+              <PrivateRoute exact path="/my" Component={MyPosts} />
+              <PrivateRoute exact path="/friends" Component={Users} />
             </Switch>
           </section>
         </Fragment>

@@ -7,3 +7,11 @@ export const AUTH_ERROR = "AUTH_ERROR";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = LOGIN_FAIL;
 export const LOGOUT = "LOGOUT";
+
+// post
+export const GET_POST = "GET_POST";
+export const GET_ALL_POST = "GET_ALL_POST";
+export const GET_MY_POST = "GET_MY_POST";
+
+// users
+export const GET_USERS = "GET_USERS";
