@@ -17,10 +17,7 @@ const UserSchema = new mongoose.Schema(
     },
     followers: [
       {
-        userId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "user",
-        },
+        type: String,
       },
     ],
   },

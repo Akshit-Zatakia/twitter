@@ -16,6 +16,7 @@ connectToDatabase();
 
 // Private
 app.use("/api/cms/users", auth, require("./routes/cms/users"));
+app.use("/api/cms/post", auth, require("./routes/cms/post"));
 
 // Public
 app.use("/api/o/users", require("./routes/o/users"));

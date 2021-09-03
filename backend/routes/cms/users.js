@@ -62,7 +62,7 @@ router.put("/follow", async (req, res) => {
 
     const user = await User.findOne({
       _id: req.user.id,
-      "followers.userId": id,
+      followers: id,
     });
 
     if (user) {
@@ -75,7 +75,7 @@ router.put("/follow", async (req, res) => {
       { _id: req.user.id },
       {
         $push: {
-          followers: { userId: id },
+          followers: id,
         },
       }
     );
@@ -106,7 +106,7 @@ router.put("/unfollow", async (req, res) => {
 
     const user = await User.findOne({
       _id: req.user.id,
-      "followers.userId": id,
+      followers: id,
     });
 
     if (!user) {
@@ -119,7 +119,7 @@ router.put("/unfollow", async (req, res) => {
       { _id: req.user.id },
       {
         $pull: {
-          followers: { userId: id },
+          followers: id,
         },
       }
     );
